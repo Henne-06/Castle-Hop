@@ -1,8 +1,10 @@
 #include "player.hpp"
 
-Player::Player(sf::Vector2f size, sf::Vector2f position, float speed)
+Player::Player(sf::Vector2f size, sf::Vector2f position, float speed,
+               sf::Color color)
     : sf::RectangleShape(size), m_speed(speed) {
   setPosition(position);
+  setFillColor(color);
 }
 
 void Player::update(float dt, const sf::Vector2u &windowSize) {

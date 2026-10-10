@@ -5,7 +5,8 @@
 
 class Player : public sf::RectangleShape {
 public:
-  Player(sf::Vector2f size, sf::Vector2f position, float speed = 200.f);
+  Player(sf::Vector2f size, sf::Vector2f position, float speed = 200.f,
+         sf::Color color = sf::Color(128, 128, 128));
 
   void update(float dt, const sf::Vector2u &windowSize);
 
