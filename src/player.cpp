@@ -1,13 +1,22 @@
 #include "player.hpp"
 
-Player::Player(sf::Vector2f size, sf::Vector2f position)
-    : sf::RectangleShape(size) {
+Player::Player(sf::Vector2f size, sf::Vector2f position, float speed)
+    : sf::RectangleShape(size), m_speed(speed) {
   setPosition(position);
 }
 
 void Player::update(float dt, const sf::Vector2u &windowSize) {
-  float speed = 200.f;
   sf::Vector2f playerPos = getPosition();
+  sf::Vector2f moveVector = processInput();
+
+  sf::Vector2f actualMovement = moveVector * m_speed * dt;
+  playerPos += actualMovement;
+
+  handleCollisions(playerPos, windowSize);
+  setPosition(playerPos);
+}
+
+sf::Vector2f Player::processInput() const {
   sf::Vector2f moveVector{};
 
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) {
@@ -27,24 +36,24 @@ void Player::update(float dt, const sf::Vector2u &windowSize) {
     moveVector = moveVector.normalized();
   }
 
-  sf::Vector2f actualMovement = moveVector * speed * dt;
-  playerPos += actualMovement;
+  return moveVector;
+}
 
-  if (playerPos.x < 0) {
-    playerPos.x = 0;
+void Player::handleCollisions(sf::Vector2f &pos,
+                              const sf::Vector2u &windowSize) {
+  if (pos.x < 0) {
+    pos.x = 0;
   }
 
-  if (playerPos.y < 0) {
-    playerPos.y = 0;
+  if (pos.y < 0) {
+    pos.y = 0;
   }
 
-  if (playerPos.x >= windowSize.x - getSize().x) {
-    playerPos.x = windowSize.x - getSize().x;
+  if (pos.x >= windowSize.x - getSize().x) {
+    pos.x = windowSize.x - getSize().x;
   }
 
-  if (playerPos.y >= windowSize.y - getSize().y) {
-    playerPos.y = windowSize.y - getSize().y;
+  if (pos.y >= windowSize.y - getSize().y) {
+    pos.y = windowSize.y - getSize().y;
   }
-
-  setPosition(playerPos);
 }

@@ -5,9 +5,16 @@
 
 class Player : public sf::RectangleShape {
 public:
-  Player(sf::Vector2f size, sf::Vector2f position);
+  Player(sf::Vector2f size, sf::Vector2f position, float speed = 200.f);
 
   void update(float dt, const sf::Vector2u &windowSize);
+
+private:
+  sf::Vector2f processInput() const;
+
+  void handleCollisions(sf::Vector2f &pos, const sf::Vector2u &windowSize);
+
+  float m_speed;
 };
 
 #endif
