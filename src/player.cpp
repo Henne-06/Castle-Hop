@@ -59,3 +59,7 @@ void Player::handleCollisions(sf::Vector2f &pos,
     pos.y = windowSize.y - getSize().y;
   }
 }
+
+void Player::addCoins(int amount) { m_coins += amount; }
+
+int Player::getCoins() const { return m_coins; }

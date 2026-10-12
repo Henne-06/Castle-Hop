@@ -10,12 +10,18 @@ public:
 
   void update(float dt, const sf::Vector2u &windowSize);
 
+  void addCoins(int amount);
+
+  int getCoins() const;
+
 private:
   sf::Vector2f processInput() const;
 
   void handleCollisions(sf::Vector2f &pos, const sf::Vector2u &windowSize);
 
   float m_speed;
+
+  unsigned int m_coins;
 };
 
 #endif

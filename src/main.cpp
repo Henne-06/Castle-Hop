@@ -1,6 +1,8 @@
+#include "coin.hpp"
 #include "player.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <random>
 
 int main() {
   // Ein einfaches SFML-Fenster öffnen
@@ -17,6 +19,8 @@ int main() {
 
   sf::Clock clock;
 
+  Coin coin{{400.f, 300.f}};
+
   window.setFramerateLimit(60);
 
   while (window.isOpen()) {
@@ -30,8 +34,17 @@ int main() {
 
     knight.update(dt, {windowWidth, windowHeigth});
 
+    if (knight.getGlobalBounds()
+            .findIntersection(coin.getGlobalBounds())
+            .has_value()) {
+
+      knight.addCoins(1);
+      coin.respawn({windowWidth, windowHeigth});
+    }
+
     window.clear(sf::Color::Blue); // Bildschirm blau färben
     window.draw(knight);
+    window.draw(coin);
     window.display();
   }
 

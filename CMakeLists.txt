@@ -22,7 +22,7 @@ FetchContent_MakeAvailable(SFML)
 
 #Das eigentliche Programm (Executable) definieren
 add_executable(2D-Game src/main.cpp
-    src/player.cpp)
+    src/player.cpp src/item.cpp src/coin.cpp)
 
 #SFML-Module verknüpfen
 target_link_libraries(2D-Game PRIVATE SFML::Graphics SFML::Window SFML::System)
