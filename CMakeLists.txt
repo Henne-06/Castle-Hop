@@ -24,5 +24,9 @@ FetchContent_MakeAvailable(SFML)
 add_executable(2D-Game src/main.cpp
     src/player.cpp src/item.cpp src/coin.cpp)
 
+# Kopiert den assets-Ordner automatisch in das Build-Verzeichnis neben die Executable
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/assets DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
+
 #SFML-Module verknüpfen
 target_link_libraries(2D-Game PRIVATE SFML::Graphics SFML::Window SFML::System)

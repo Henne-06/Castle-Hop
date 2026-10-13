@@ -23,6 +23,16 @@ int main() {
 
   window.setFramerateLimit(60);
 
+  sf::Font font;
+  if (!font.openFromFile("assets/fonts/Roboto-VariableFont_wdth,wght.ttf")) {
+    std::cout << "Font-Datei konnte nicht gefunden worden" << std::flush;
+  }
+  sf::Text coinText(font);
+  coinText.setCharacterSize(24);
+  coinText.setFillColor(sf::Color::White);
+  coinText.setPosition({10.f, 10.f});
+  coinText.setString(L"Münzen: 0");
+
   while (window.isOpen()) {
     sf::Time deltaTime = clock.restart();
     float dt = deltaTime.asSeconds();
@@ -39,12 +49,14 @@ int main() {
             .has_value()) {
 
       knight.addCoins(1);
+      coinText.setString(L"Münzen: " + std::to_wstring(knight.getCoins()));
       coin.respawn({windowWidth, windowHeigth});
     }
 
     window.clear(sf::Color::Blue); // Bildschirm blau färben
     window.draw(knight);
     window.draw(coin);
+    window.draw(coinText);
     window.display();
   }
 
