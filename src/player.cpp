@@ -2,7 +2,7 @@
 
 Player::Player(sf::Vector2f size, sf::Vector2f position, float speed,
                sf::Color color)
-    : sf::RectangleShape(size), m_speed(speed) {
+    : sf::RectangleShape(size), m_speed(speed), m_coins{0} {
   setPosition(position);
   setFillColor(color);
 }
